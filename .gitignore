@@ -1,5 +1,8 @@
 node_modules
 bower_components
+_site
+.sass-cache
+.jekyll-metadata
 pages/dashboard.old.html
 pages/dashboard2.html
 pages/education.html
