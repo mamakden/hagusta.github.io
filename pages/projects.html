@@ -1,0 +1,80 @@
+---
+layout: dashboard_default
+title: Hendy's Projects
+url: pages/project.html
+---
+
+
+<div>
+{% for emp in site.data.projects.employer %}
+<div class="row">
+    <div class="col-lg-9 col-md-10 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-4 text-left" >
+                        <h4><strong>{{emp.period}} </strong></h4>
+                    </div>
+                    <div class="col-xs-4 text-center" >
+                        <h4><strong>{{emp.name}} </strong></h4>
+                    </div>
+                    <div class="col-xs-4 text-right">
+                        <h4> <strong>{{emp.location}} </strong></h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-body">
+                {% for project in emp.projects %}
+                <div class="row">
+                <div class="col-xs-12 text-left">
+                    <p>
+                    
+                        <h5><strong>({{project.period}}) {{ project.name }}  </strong></h5>
+                        <strong>{{ project.role }} </strong> <br>
+                        {{ project.desc }} <br>
+                        {% if project.roledescs == null %}
+                            <strong>Primary Role:</strong><br> {{ project.roledesc }} <br>
+                            {% if project.roledesc2 != null %}
+                                <strong>Secondary Role:</strong><br> {{ project.roledesc2 }} <br>
+                            {% endif %}
+                        {% endif %}
+                        {% if project.roledescs != null %}
+                            <strong>Roles:</strong><br>
+                            <ul>
+                                {% for role in project.roledescs %}
+                                    <li> {{ role.role }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {% if project.features != null %}
+                            {% for feature in project.features %}
+                        
+                                {% if forloop.first %}
+                                    <strong>Project Features:</strong><br>
+                                    <ul>
+                                {% endif %}
+                                <li> {{feature.feature}} </li>
+                                {% if forloop.last %}
+                                    </ul>
+                                {% endif %}
+                            {% endfor %}  
+                        {% endif %}
+                
+                    </p>
+                    <hr />
+                </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="panel-footer">
+                <span class="pull-left"></span>
+                <!--span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span -->
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div> 
+{% endfor %}
+</div>

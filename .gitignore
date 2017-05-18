@@ -5,5 +5,4 @@ _site
 .jekyll-metadata
 pages/dashboard.old.html
 pages/dashboard2.html
-pages/education.html
-pages/projects.html
+./dashboard.html

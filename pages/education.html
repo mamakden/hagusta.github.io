@@ -1,0 +1,39 @@
+---
+layout: dashboard_default
+title: Hendy's Education
+url: pages/education.html
+---
+
+
+<div>
+ {% for type in site.data.education.types %}
+ <div class="row">
+     <div class="col-lg-8 col-md-10 col-sm-12">
+         <div class="panel panel-default">
+             <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-xs-4 text-left" >
+                         <h5><strong>{{type.type}}</strong></h5>
+                     </div>
+                 </div>
+             </div>
+             
+             <div class="panel-body">
+             {% for inst in type.institutions %}
+                 <h5><strong>({{inst.period}}) {{ inst.name }}  </strong></h5>
+                 {{inst.major}}<br>
+                 {{inst.diploma}}
+                 <hr/>
+             {% endfor %}
+             </div>
+             
+             <div class="panel-footer">
+                 <span class="pull-left"></span>
+                 <!--span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span -->
+                 <div class="clearfix"></div>
+             </div>
+         </div>
+     </div>
+ </div> 
+ {% endfor %}
+</div>
