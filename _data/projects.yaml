@@ -20,7 +20,7 @@ employer:
           role: Test Manager
           roledesc: Plan, prepare and execute Acceptance Test.
           features: 
-            - feature : Complex testing involving integration of many technology and third party vendors, which include RBT, oracle middleware (OSB), IN Legacy systems, Amdocs’s billing systems, Amdocs’s CRM and Amdocs ordering system.
+            - feature : Complex testing involving integration of many technology and third parties vendors, which include RBT, oracle middleware (OSB), IN Legacy systems, Amdocs’s billing systems, Amdocs’s CRM and Amdocs ordering system.
             - feature : CVP, ICM and eGain functional testing. Create scenarios and manage testing.
             - feature : CVP, ICM and eGain load testing.  Manage CVP load test by telephony load test vendor Cyara. Plan, prepare and execute eGain email and chat load test.
             
@@ -69,7 +69,7 @@ employer:
             - role: Analyze and Design solution for USAGE (AMDOC rated-events), SUBSCRIBER (AMDOC subscriber status)
             - role: Ericsson and Huawei MSC CDR and GGSN ANS.1 analyst.  NRTEDE and TAP3 ANS.1 analyst. SCP data analyst.
             
-        - name: Data Mart Maintainance 
+        - name: Data Mart Maintenance 
           desc: Maintaining datamarts in two telcos companies. One in Jakarta and other in KL
           period: 2006-2010
           role: BI Consultant
@@ -90,7 +90,7 @@ employer:
         - name: Data center migration
           desc: A newly created telco company is moving its data center
           period: 2005-2006
-          role: Assitant to Test Manager
+          role: Assistant to Test Manager
           roledesc: Plan, prepare and execute UAT
 
     - name: Infotronic
@@ -98,10 +98,10 @@ employer:
       location: Jakarta
       projects:
         - name: Document Management System
-          desc: Budgeting document management in Departement of Defence  
+          desc: Budgeting document management in Department of Defence  
           period: 2005
           role: Support
-          roledesc: implentation support
+          roledesc: implementation support
           
     - name: Q2001
       period: 2003-2004

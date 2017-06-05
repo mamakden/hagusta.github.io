@@ -1,42 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-    <header>
-        <title>{{ page.title }}</title>
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom CSS -->
-        <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+  {% include head.html %}
 
-        <!-- Custom Fonts -->
-        <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-          <style>
-            p {
-                border: 5px solid #eee;
-              }
-        </style>
-    </header>
+  <body>
 
-    <body>
-        <div id="wrapper">
-            <div class="col-lg-2">
-            </div>
-            <div class="col-lg-8">
+    <!--{% include header.html %}-->
+    <div id="wrapper">
+        <div class="col-lg-1">
+        </div -->
+        <div class="col-lg-10">
+            <div class="row">
             {% include navbar.html %}
-                <row>
-                    {{content}}
-                </row>
             </div>
-            <div class="col-lg-2">
+            <div class="row">
+            {% include header.html %}
             </div>
+            <section class="main-content">
+                <div class="wrapper">
+                {{ content }}
+                </div>
         </div>
-    </body>
-    
-    <footer>
-    </footer>
-        <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+        <div class="col-lg-1">
+        </div>
+    </div>
+    {% include footer.html %}
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  </body>
+
+    {% include scripts.html %}
+
 </html>
