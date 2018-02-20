@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "KDD Cup 2009 : Customer relationship prediction" 
-description: "Exploritory exercise to predict customer propensity with KDD Cup 2009 dataset"
+title: 'KDD Cup 2009 : Customer relationship prediction'
+description: Exploritory exercise to predict customer propensity with KDD Cup 2009 dataset
 categories: journal, ML
 tags: CRM, wide features
 ---

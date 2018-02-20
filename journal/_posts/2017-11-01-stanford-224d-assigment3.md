@@ -1,8 +1,8 @@
 ---
 layout: post
 title: NLP Sentiment (Stanford cs224d Assigment 3) 
-description: "Sentiment analysis is one of the subject area of NLP that benefited by the recent advancement by deep learning. Stanford cs224 Assigment 3 exposes student to Recursive Neural Network (RNN) as one of the latest deep learning model for sentiment analysis. This is author journal/notes for the assigment"
-tags: NLP, cs224d, Stanford, "assigment 3"
+description: Sentiment analysis is one of the subject area of NLP that benefited by the recent advancement by deep learning. Stanford cs224 Assigment 3 exposes student to Recursive Neural Network (RNN) as one of the latest deep learning model for sentiment analysis. This is author journal/notes for the assigment
+tags: NLP, cs224d, Stanford, assigment 3
 categories: journal, NLP, ML
 ---
 

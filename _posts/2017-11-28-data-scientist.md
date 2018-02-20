@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Data science/scientist what's that
-description: "a look to data science"
+description: A Look to Data Science
 categories: blog, data science
 ---
 

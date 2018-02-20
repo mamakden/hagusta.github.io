@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Environment  
-description: "my notebook environment setup"
+description: my notebook environment setup
 categories: notes, etc
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: From Analytics to Data Scientist to AI
-description: "End of year reflection"
+description: End of year reflection
 categories: blog, ML
 ---
 
