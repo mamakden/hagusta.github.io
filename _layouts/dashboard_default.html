@@ -1,29 +1,18 @@
+---
+isbootstrap: true
+---
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title> {{ page.title }}</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="{{ site.url }}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{{ site.url }}/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="{{ site.url }}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
+    {% include head.html%}
     <!-- Custom Bokeh CSS -->
     <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css" type="text/css" />
-
+    
+    <!-- Custom CSS -->
+    <link href="{{ basesite.url }}/public/css/sb-admin-2.css" rel="stylesheet">
 </head>
+
 
 <body>
 <!-- Custom Bokeh Chart -->
@@ -46,9 +35,6 @@
             <div class="row">
                 {{content}}
             </div>        
-            
-            
-
     </div>
 
  

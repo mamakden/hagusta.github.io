@@ -1,3 +1,0 @@
-Sitemap: http://blah/sitemap.xml
-User-Agent: *
-Disallow: /img
