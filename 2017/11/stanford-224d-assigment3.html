@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+
+
+  <!-- CSS -->
+    
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <title>
+    
+      NLP Sentiment (Stanford cs224d Assigment 3) &middot; HJ Agusta
+    
+  </title>
+    
+    
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+    
+  <!-- other junk -->
+  <link rel="canonical" href="http://localhost:4000/2017/11/stanford-224d-assigment3.html">
+  <meta name="description" content="Sentiment analysis is one of the subject area of NLP that benefited by the recent advancement by deep learning. Stanford cs224 Assigment 3 exposes student to...">
+    
+  
+
+    
+</head>
+
+
+
+
+
+
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>HJ Agusta technical notes, blog and journals</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://localhost:4000/">Home</a>
+
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+            
+                
+                <a class="sidebar-nav-item" href="/blog/index.html">Blog</a>
+                
+            
+        
+      
+    
+      
+        
+            
+        
+      
+    
+      
+        
+            
+        
+      
+    
+      
+        
+            
+        
+      
+    
+      
+        
+            
+                
+                <a class="sidebar-nav-item" href="/journal/index.html">Journal</a>
+                
+            
+        
+      
+    
+      
+        
+            
+                
+                <a class="sidebar-nav-item" href="/machine_learning/index.html">Machine Learning</a>
+                
+            
+        
+      
+    
+      
+        
+            
+                
+            
+        
+      
+    
+      
+        
+            
+                
+                <a class="sidebar-nav-item" href="/notes/index.html">Notes</a>
+                
+            
+        
+      
+    
+      
+        
+            
+                
+            
+        
+      
+    
+
+    <!--a class="sidebar-nav-item" href="/blog/">Blog</a-->
+    <!--a class="sidebar-nav-item" href="/journal/">Journal</a-->
+    <a class="sidebar-nav-item" href="/pages/dashboard">Profile</a>
+    <a class="sidebar-nav-item" href="https://github.com/hagusta">GitHub project</a>
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2018. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">HJ Agusta</a>
+            <small>Blog, Notes and Journals</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">NLP Sentiment (Stanford cs224d Assigment 3)</h1>
+  <span class="post-date">01 Nov 2017</span>
+  <h2 id="overview">Overview</h2>
+
+<p>Sentiment analysis is one of the subject area of NLP that benefited by the recent advancement by deep learning. Stanford cs224 Assigment 3 exposes student to Recursive Neural Network (RNN) as one of the latest deep learning model for sentiment analysis. This is author journal/notes for the assigment.</p>
+
+<p>(Concepts, model and implementation.)</p>
+
+<h2 id="concepts">Concepts</h2>
+
+<p>data note:
+each data represent a sentence and more. The data contains :</p>
+<ol>
+  <li>sentence sentiment score or root score (0/– to 4/++).</li>
+  <li>each word (a leaf) score</li>
+  <li>node score which can be combinded score two words, or a word and a node, or node with other node.</li>
+</ol>
+
+<p>for example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(3 (3 Deliciously) (1 (1 slow) (2 .)))
+ |                  ^  ^   ^    ^  ^
+ |                  |  |   |    |  a leaf/word '.' count as word
+ |                  |  |   |    score for '.' (2) which is nuetral
+ |                  |  |   leaf/word 'slow' 
+ |                  |  score for 'slow' (1) which is -    
+ |                  a node and score for word 'slow' and '.'
+ a root score (3) which is +
+</code></pre></div></div>
+
+<p>another view:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        root(3)
+     _____|______
+    |            | 
+    |           node(1)
+    |              ___|__
+    |             |      |
+Deliciously(3) slow(1) .(2)
+</code></pre></div></div>
+
+<p>tree.num_words() is giving wrong word count as it count all labels the sentance which also include node’s label. it return 5 for example above</p>
+
+<h2 id="implementation">Implementation</h2>
+<p>both implentations are in tensorflow</p>
+<h3 id="dynamic-model">Dynamic model</h3>
+<h3 id="static-model">Static model</h3>
+
+<h2 id="problems">Problems</h2>
+<h3 id="exploding-loss">Exploding loss</h3>
+<h4 id="initialization">initialization</h4>
+<h4 id="layer-normalization">layer normalization</h4>
+<h4 id="optimatization">optimatization</h4>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2018/02/how-to-add-image-jekyll.html">
+            How to add image Jekyll
+            <small>09 Feb 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2018/02/how-to-add-code-jekyll.html">
+            How to add code Jekyll
+            <small>09 Feb 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2018/01/kdd-2009-customer-relationship-pred.html">
+            KDD Cup 2009 : Customer relationship prediction
+            <small>01 Jan 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>
