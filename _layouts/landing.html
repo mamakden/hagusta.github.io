@@ -7,30 +7,33 @@
     <div class="col-lg-1">
     </div>
     <div class="col-lg-10">
-    <div class="row">
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ basesite.url }}/pages/dashboard">Profile</a>
-            <a class="navbar-brand" href="{{ basesite.url }}/">Homepage</a>
-            <a class="navbar-brand" href="{{ basesite.url }}/posts">Posts</a>
-            {% for node in site.pages %}
-                {% if node.title != null %}
-                    {% if node.layout == "home" %}
-                        {% unless node.title contains "Home" %}
-                            {% unless node.title contains "page" %}
-                                <a class="navbar-brand"  href="{{ node.url }}">{{ node.title }}</a>
-                                <!-- "{% if page.url == node.url %} active{% endif %}" -->
-                            {% endunless %}
-                        {% endunless %}
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
+        <div class="row">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ basesite.url }}/pages/dashboard">Profile</a>
+                    <a class="navbar-brand" href="{{ basesite.url }}/">Homepage</a>
+                    <a class="navbar-brand" href="{{ basesite.url }}/posts">Posts</a>
+                    {% for node in site.pages %}
+                        {% if node.title != null %}
+                            {% if node.layout == "home" %}
+                                {% unless node.title contains "Home" %}
+                                    {% unless node.title contains "page" %}
+                                        <a class="navbar-brand"  href="{{ node.url }}">{{ node.title }}</a>
+                                        <!-- "{% if page.url == node.url %} active{% endif %}" -->
+                                    {% endunless %}
+                                {% endunless %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </nav>
         </div>
-    </nav>
-    </div>
+        <div class="row">
+        {{ content }}
+        </div>
     </div>
 
-    {{ content }}
+    
       
     <div class="col-lg-1">
     </div>
