@@ -1,0 +1,48 @@
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+
+# Setup
+title:               HJ Agusta
+tagline:             'Blog, Notes and Journals'
+description:         'HJ Agusta technical notes, blog and journals'
+#url:                 http://lanyon.getpoole.com
+#baseurl:             '/blog'
+baseurl:             ''
+
+github_page:         https://github.com/hagusta
+
+# About/contact
+author:
+  name:              Hendy J Agusta
+#  url:               https://twitter.com/mdo
+  email:             hendy.j.agusta@gmail.com
+
+# Custom vars
+version:             1.0.0
+
+plugins:
+  - jekyll-paginate-v2
+  - jekyll-admin
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
+# Pagination Settings
+# Produces a cleaner folder structure when using categories
+permalink: /:year/:month/:title.html
+
+# Explicitly turn off the old code
+#paginate: 'nil'
+#paginate_path: '/blog/page:num/'
+
+# Pagination Settings
+pagination:
+  enabled: true
+  per_page: 3
+  permalink: '/page/:num/'
+  title: ':title - page :num of :max'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
