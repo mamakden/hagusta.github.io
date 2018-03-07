@@ -1,0 +1,36 @@
+types:
+    - type: Formal Education
+      institutions:
+        - name: University of Southern California
+          period: 1993-1998
+          major: Aerospace Engineering
+          diploma: BSC
+          
+        - name: Universitas Indonesia
+          period: 2000-2002
+          major: Magister Teknologi Informasi
+          diploma: Magister
+        
+    - type: Training Courses
+      institutions:
+        - name: Hewlett-Packard Singapore
+          period: 2007
+          major: Neoview Essential
+        - name: Oracle Indonesia
+          period: 2008
+          major: Oracle BI Suite (Hyperion) And Essbase
+        - name: Hewlett-Packard Indonesia
+          period: 2008
+          major: Business Object
+        - name: Ab-Initio
+          period: 2010
+          major: Ab-Initio Introduction 
+        - name: Ab-Initio
+          period: 2010
+          major: Ab-Initio Advance
+        - name: Ab-Initio
+          period: 2011
+          major: Ab-Initio Environment Suite (AIES) administration
+        - name: Coursera
+          period: 2016
+          major: University of Stanford Learning Machine
