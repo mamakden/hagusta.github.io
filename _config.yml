@@ -25,6 +25,7 @@ version:             1.0.0
 plugins:
   - jekyll-paginate-v2
   - jekyll-admin
+#  - jekyll-paginate
 exclude:
   - Gemfile
   - Gemfile.lock
