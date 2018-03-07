@@ -1,24 +1,187 @@
----
-layout: landing
-title: homepage
-description: Hendy's homepage
-isbootstrap: true
----
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
 
-<div class="jumbotron jumbotron-fluid" style="border: 10px solid #eee">
+
+  <!-- CSS -->
+    
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'  type='text/css'>
+  <link rel="stylesheet" href="/public/css/font-awesome.min.css" type="text/css" >
+  <link rel="stylesheet" href="/public/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/public/css/stylesheet.css">
+    
+    
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+    
+  <!-- other junk -->
+  <link rel="canonical" href="/">
+  <meta name="description" content="Hendy's homepage">
+    
+  
+
+    
+</head>
+
+
+
+
+
+
+
+
+  <body>
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-10">
+        <div class="row">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/pages/dashboard">Profile</a>
+                    <a class="navbar-brand" href="/">Homepage</a>
+                    <a class="navbar-brand" href="/posts">Posts</a>
+                    
+                        
+                            
+                        
+                    
+                        
+                            
+                        
+                    
+                        
+                            
+                        
+                    
+                        
+                    
+                        
+                            
+                        
+                    
+                        
+                            
+                        
+                    
+                        
+                            
+                        
+                    
+                        
+                            
+                        
+                    
+                        
+                            
+                        
+                    
+                        
+                            
+                                
+                                    
+                                        <a class="navbar-brand"  href="/blog/index.html">Blog</a>
+                                        <!-- "" -->
+                                    
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                    
+                                        <a class="navbar-brand"  href="/journal/index.html">Journal</a>
+                                        <!-- "" -->
+                                    
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                    
+                                        <a class="navbar-brand"  href="/machine_learning/index.html">Machine Learning</a>
+                                        <!-- "" -->
+                                    
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                    
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                    
+                                        <a class="navbar-brand"  href="/notes/index.html">Notes</a>
+                                        <!-- "" -->
+                                    
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                    
+                                
+                            
+                        
+                    
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+        <div class="jumbotron jumbotron-fluid" style="border: 10px solid #eee">
     <div class="container">
         <h1 class="display-3">Hendy's Profile</h1>
         <hr class="my-4">
         <div class="col-lg-4">
-            <img class="img-circle center-block" src="{{ site.baseurl }}/assets/img/hja-profile-pic.jpg" width="250" height="300">
+            <img class="img-circle center-block" src="/assets/img/hja-profile-pic.jpg" width="250" height="300">
         </div>
         <div class="col-lg-8">
-            <p>Hendy has 10+ work experiences primarily in Data Management/Business Intelligence/Analytics. 
-                He has played many different roles such as technical lead, solution architech, etc. Involved in various 
-                activities such as: 
-                data governance, requirement analysis, analysis and design, tests, trouble shootings, software development, 
-                system administration etc.</p>
+            <p>Hendy has 10+ work experiences in project delivery primarily in Business Intelligence/Analytics. 
+                He has played many different roles mainly as technical lead with activities includes requirement analysis, analysis and design, 
+                test, trouble shooting etc. 
+                Even hand-on development, system administration, operation policy etc.</p>
             <p>Today he fancy himself as a data scientist and inovation-democratization evangelist. 
                 Super interested in machine learning especially deep-learning. He has strong opinion of the only way to relieve Telco 
                 stagnation is by inovation-democratization through fostering IOT movement.</p>
@@ -27,3 +190,32 @@ isbootstrap: true
 </div> 
 
 
+
+        </div>
+    </div>
+
+    
+      
+    <div class="col-lg-1">
+    </div>
+  </body>
+    <!-- jQuery -->
+<script src="/public/scripts/jquery/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/public/scripts/bootstrap/js/bootstrap.min.js"></script>
+<script src="/public/scripts/sb-admin/sb-admin-2.js"></script>
+<script src="/public/scripts/metisMenu/metisMenu.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+
+<script>
+var clipboard = new Clipboard('.share-btn');
+
+    clipboard.on('success', function(e) {
+        console.log(e);
+    });
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+</script>
+</html>

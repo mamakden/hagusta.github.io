@@ -1,11 +1,116 @@
----
-layout: dashboard_default
-title: Contact
-url: pages/contact.html
-isbootstrap: true
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="row">
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+
+
+  <!-- CSS -->
+    
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'  type='text/css'>
+  <link rel="stylesheet" href="/public/css/font-awesome.min.css" type="text/css" >
+  <link rel="stylesheet" href="/public/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/public/css/stylesheet.css">
+    
+    
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+    
+  <!-- other junk -->
+  <link rel="canonical" href="/pages/contact">
+  <meta name="description" content="HJ Agusta technical notes, blog and journals">
+    
+  
+
+    
+</head>
+
+
+
+
+
+
+
+    <!-- Custom Bokeh CSS -->
+    <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css" type="text/css" />
+    
+    <!-- Custom CSS -->
+    <link href="/public/css/sb-admin-2.css" rel="stylesheet">
+</head>
+
+
+<body>
+<!-- Custom Bokeh Chart -->
+
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/pages/dashboard">Dashboard</a>
+        <a class="navbar-brand" href="/pages/dashboard#competency">Competency</a>
+        <a class="navbar-brand" href="/pages/dashboard#project">Timeline</a>
+        <a class="navbar-brand" href="/pages/dashboard#fact">Fact</a>
+        <a class="navbar-brand" href="/pages/education">Education</a>
+        <a class="navbar-brand" href="/pages/projects">Projects</a>
+        <a class="navbar-brand" href="/pages/achievement">Achievement</a>
+        <a class="navbar-brand" href="/pages/contact">Contact</a>
+        <a class="navbar-brand" href="/index.html">Homepage</a>
+    </div>
+</nav>
+
+        
+        
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="/pages/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li> 
+            <li>
+                <a href="/pages/dashboard#project"><i class="fa fa-bar-chart-o fa-fw"></i> Quick Timeline</a>
+            </li> 
+            <li>
+                <a href="/pages/dashboard#fact"><i class="fa fa-bar-chart-o fa-fw"></i> Quick Facts</a>
+            </li> 
+            <li>
+                <a href="/pages/education"><i class="fa fa-graduation-cap fa-fw"></i> Education</a>
+            </li> 
+            <li>
+                <a href="/pages/projects"><i class="fa fa-wrench fa-fw"></i> Projects</a>
+            </li>
+            <li>
+                <a href="/pages/achievement"><i class="fa fa-trophy fa-fw"></i> Achievement</a>
+            </li>
+            <li>
+                <a href="/pages/contact"><i class="fa fa-group fa-fw"></i> Contact</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Contact</h2>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <div class="row">
     <div class="panel-body">
     <a class="fa fa-envelope-o fa-fw" href="mailto:hendy.j.agusta@gmail.com"></a>hendy.j.agusta@gmail.com <br>
     <i class="fa fa-mobile fa-fw"></i>+6281317400153 <br>
@@ -13,3 +118,29 @@ isbootstrap: true
     <a class="fa fa-github fa-fw" href="https://hagusta.github.io/"></a> Hendy's Github
     </div>
 </div>
+            </div>        
+    </div>
+
+ 
+</body>
+<!-- jQuery -->
+<script src="/public/scripts/jquery/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/public/scripts/bootstrap/js/bootstrap.min.js"></script>
+<script src="/public/scripts/sb-admin/sb-admin-2.js"></script>
+<script src="/public/scripts/metisMenu/metisMenu.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+
+<script>
+var clipboard = new Clipboard('.share-btn');
+
+    clipboard.on('success', function(e) {
+        console.log(e);
+    });
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+</script>
+
+</html>
