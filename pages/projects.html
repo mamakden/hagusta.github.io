@@ -1,71 +1,154 @@
----
-layout: dashboard_default
-title: Hendy's Projects
-url: pages/project.html
-isbootstrap: true
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
 
-<div>
-    {% for emp in site.data.projects.employer %}
+
+  <!-- CSS -->
+    
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'  type='text/css'>
+  <link rel="stylesheet" href="/public/css/font-awesome.min.css" type="text/css" >
+  <link rel="stylesheet" href="/public/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/public/css/stylesheet.css">
+    
+    
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+    
+  <!-- other junk -->
+  <link rel="canonical" href="/pages/projects">
+  <meta name="description" content="HJ Agusta technical notes, blog and journals">
+    
+  
+
+    
+</head>
+
+
+
+
+
+
+
+    <!-- Custom Bokeh CSS -->
+    <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css" type="text/css" />
+    
+    <!-- Custom CSS -->
+    <link href="/public/css/sb-admin-2.css" rel="stylesheet">
+</head>
+
+
+<body>
+<!-- Custom Bokeh Chart -->
+
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/pages/dashboard">Dashboard</a>
+        <a class="navbar-brand" href="/pages/dashboard#competency">Competency</a>
+        <a class="navbar-brand" href="/pages/dashboard#project">Timeline</a>
+        <a class="navbar-brand" href="/pages/dashboard#fact">Fact</a>
+        <a class="navbar-brand" href="/pages/education">Education</a>
+        <a class="navbar-brand" href="/pages/projects">Projects</a>
+        <a class="navbar-brand" href="/pages/achievement">Achievement</a>
+        <a class="navbar-brand" href="/pages/contact">Contact</a>
+        <a class="navbar-brand" href="/index.html">Homepage</a>
+    </div>
+</nav>
+
+        
+        
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="/pages/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li> 
+            <li>
+                <a href="/pages/dashboard#project"><i class="fa fa-bar-chart-o fa-fw"></i> Quick Timeline</a>
+            </li> 
+            <li>
+                <a href="/pages/dashboard#fact"><i class="fa fa-bar-chart-o fa-fw"></i> Quick Facts</a>
+            </li> 
+            <li>
+                <a href="/pages/education"><i class="fa fa-graduation-cap fa-fw"></i> Education</a>
+            </li> 
+            <li>
+                <a href="/pages/projects"><i class="fa fa-wrench fa-fw"></i> Projects</a>
+            </li>
+            <li>
+                <a href="/pages/achievement"><i class="fa fa-trophy fa-fw"></i> Achievement</a>
+            </li>
+            <li>
+                <a href="/pages/contact"><i class="fa fa-group fa-fw"></i> Contact</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Hendy's Projects</h2>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <div>
+    
         <div class="row">
             <div class="col-lg-9 col-md-10 col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-4 text-left" >
-                                <h4><strong>{{emp.period}} </strong></h4>
+                                <h4><strong>Aug 2016 </strong></h4>
                             </div>
                             <div class="col-xs-4 text-center" >
-                                <h4><strong>{{emp.name}} </strong></h4>
+                                <h4><strong>Hewlett-Packard Malaysia </strong></h4>
                             </div>
                             <div class="col-xs-4 text-right">
-                                <h4> <strong>{{emp.location}} </strong></h4>
+                                <h4> <strong>Subang Jaya </strong></h4>
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
-                    {% for project in emp.projects %}
+                    
                     <div class="row">
                         <div class="col-xs-12 text-left">
                             <p>
                                 
-                                <h5><strong>({{project.period}}) {{ project.name }}  </strong></h5>
-                                <strong>{{ project.role }} </strong> <br>
-                                {{ project.desc }} <br>
-                                {% if project.roledescs == null %}
-                                <strong>Primary Role:</strong><br> {{ project.roledesc }} <br>
-                                {% if project.roledesc2 != null %}
-                                <strong>Secondary Role:</strong><br> {{ project.roledesc2 }} <br>
-                                {% endif %}
-                                {% endif %}
-                                {% if project.roledescs != null %}
-                                <strong>Roles:</strong><br>
-                                <ul>
-                                    {% for role in project.roledescs %}
-                                    <li> {{ role.role }}</li>
-                                    {% endfor %}
-                                </ul>
-                                {% endif %}
-                                {% if project.features != null %}
-                                {% for feature in project.features %}
+                                <h5><strong>(Aug 2016) IP-CC (IP Contact Center) integration  </strong></h5>
+                                <strong>Test Manager </strong> <br>
+                                IP-CC (IP Contact Center) integration at one of the Telecommunication Company in Malaysia. <br>
                                 
-                                {% if forloop.first %}
-                                <strong>Project Features:</strong><br>
-                                <ul>
-                                    {% endif %}
-                                    <li> {{feature.feature}} </li>
-                                    {% if forloop.last %}
-                                </ul>
-                                {% endif %}
-                                {% endfor %}  
-                                {% endif %}
+                                <strong>Primary Role:</strong><br> Manage, plan, prepare and execute Acceptance Test. <br>
+                                
+                                
+                                
+                                
                             
                             </p>
                         <hr />
                     </div>
                 </div>
-                {% endfor %}
+                
             </div>
             
             <div class="panel-footer">
@@ -75,5 +158,448 @@ isbootstrap: true
         </div>
     </div>
 </div> 
-    {% endfor %}
+    
+        <div class="row">
+            <div class="col-lg-9 col-md-10 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4 text-left" >
+                                <h4><strong>2005-Apr 2016 </strong></h4>
+                            </div>
+                            <div class="col-xs-4 text-center" >
+                                <h4><strong>Hewlett-Packard Indonesia  </strong></h4>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <h4> <strong>Jakarta </strong></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2014-2016) Cisco IP-CC (IP contact center)  </strong></h5>
+                                <strong>Test Manager </strong> <br>
+                                Amdocs’s CRM and Cisco IP-CC (IP Contact Center) integration at one of the Telecommunication Company in Indonesia. <br>
+                                
+                                <strong>Primary Role:</strong><br> Plan, prepare and execute Acceptance Test. <br>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <strong>Project Features:</strong><br>
+                                <ul>
+                                    
+                                    <li> Complex testing involving integration of many technology and third parties vendors, which include RBT, oracle middleware (OSB), IN Legacy systems, Amdocs’s billing systems, Amdocs’s CRM and Amdocs ordering system. </li>
+                                    
+                                
+                                
+                                
+                                    <li> CVP, ICM and eGain functional testing. Create scenarios and manage testing. </li>
+                                    
+                                
+                                
+                                
+                                    <li> CVP, ICM and eGain load testing.  Manage CVP load test by telephony load test vendor Cyara. Plan, prepare and execute eGain email and chat load test. </li>
+                                    
+                                </ul>
+                                
+                                  
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2013-2014) Event Management Platform  </strong></h5>
+                                <strong>Ab-Initio Consultant </strong> <br>
+                                Integration all Telco event data into one processing platform. Rated-Event, CDR, GGSN, USSD etc. <br>
+                                
+                                <strong>Primary Role:</strong><br> Infrastructure design and integration consultant. OS installation, configuration and administration. Ab-Initio Environment Suite (AIES) architect. AIES installation, configuration and Administration. <br>
+                                
+                                <strong>Secondary Role:</strong><br> Define and implement development standardization and policies. <br>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <strong>Project Features:</strong><br>
+                                <ul>
+                                    
+                                    <li> Ab-Initio Environment Suite: Ab-Initio Parallel, Real-time, ASN.1 converter, Metadata Hub, Operation Console, ICFF, Application Configuration and Business Rule engine, EME, and Authorization Gateway. </li>
+                                    
+                                
+                                
+                                
+                                    <li> Medium infrastructure complexity (20 servers, two SAN storages in multiple locations, High availability, clustering) </li>
+                                    
+                                
+                                
+                                
+                                    <li> Veritas Cluster Suites </li>
+                                    
+                                </ul>
+                                
+                                  
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2012) CDR processing migration  </strong></h5>
+                                <strong>Ab-Initio Consultant </strong> <br>
+                                Migrate and enhance existing Ab-Initio ASN.1 conversions graph to new server. <br>
+                                
+                                <strong>Primary Role:</strong><br> Linux and Ab-Initio administration and migration <br>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <strong>Project Features:</strong><br>
+                                <ul>
+                                    
+                                    <li> Ab-Initio Parallel and ASN.1 Processing </li>
+                                    
+                                </ul>
+                                
+                                  
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2011) Zero Rated Event  </strong></h5>
+                                <strong>Ab-Initio Consultant </strong> <br>
+                                Zero rated event data to serve to CRM using Ab-Initio flat data <br>
+                                
+                                <strong>Primary Role:</strong><br> Solution architect for Ab-Initio and Veritas file cluster integration <br>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <strong>Project Features:</strong><br>
+                                <ul>
+                                    
+                                    <li> Ab-Initio SOAP, Query engine and Index Compressed Flat File (ICFF) technology. Veritas Cluster Suit </li>
+                                    
+                                </ul>
+                                
+                                  
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2010) USSD Menu Personalization  </strong></h5>
+                                <strong>Ab-Initio Consultant </strong> <br>
+                                USSD (Unstructured Supplementary Service Data) is a Global System for Mobile(GSM) communication technology that is used to send text between a mobile phone and an application program in the network. When user reached the application by dial-in *<some digits># e.i *666# etc, he/she will be presented with a service menu. In this project the menu are personalized from person-to-person. <br>
+                                
+                                <strong>Primary Role:</strong><br> Technical Lead <br>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <strong>Project Features:</strong><br>
+                                <ul>
+                                    
+                                    <li> Ab-Initio real-time (TCP-service) technology. Linux High-Availability platform. </li>
+                                    
+                                </ul>
+                                
+                                  
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2010) Data warehouse ETL migration  </strong></h5>
+                                <strong>Ab-Initio Consultant </strong> <br>
+                                Ab-Initio parallel batch ETL Processing. In the project our client migrates from variety ETL technologies (Oracle scripts, Unix scripts, COSORT etc) to Ab-Initio <br>
+                                
+                                
+                                <strong>Roles:</strong><br>
+                                <ul>
+                                    
+                                    <li> Solution Architect</li>
+                                    
+                                    <li> Analyze and Design solution for USAGE (AMDOC rated-events), SUBSCRIBER (AMDOC subscriber status)</li>
+                                    
+                                    <li> Ericsson and Huawei MSC CDR and GGSN ANS.1 analyst.  NRTEDE and TAP3 ANS.1 analyst. SCP data analyst.</li>
+                                    
+                                </ul>
+                                
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2006-2010) Data Mart Maintenance  </strong></h5>
+                                <strong>BI Consultant </strong> <br>
+                                Maintaining datamarts in two telcos companies. One in Jakarta and other in KL <br>
+                                
+                                <strong>Primary Role:</strong><br> Mainly database administration and create custom reporting <br>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <strong>Project Features:</strong><br>
+                                <ul>
+                                    
+                                    <li> Telco CDR datamart and billing data </li>
+                                    
+                                
+                                
+                                
+                                    <li> Oracle </li>
+                                    
+                                </ul>
+                                
+                                  
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2008) New Datasources to datamart  </strong></h5>
+                                <strong>BI Consultant </strong> <br>
+                                Adding new datasource to extend existing datamart <br>
+                                
+                                <strong>Primary Role:</strong><br> Lead development process. Requirement elicitation. Database Design. Testing. Documentation etc. <br>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <strong>Project Features:</strong><br>
+                                <ul>
+                                    
+                                    <li> Oracle database </li>
+                                    
+                                
+                                
+                                
+                                    <li> Datastage </li>
+                                    
+                                </ul>
+                                
+                                  
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2005-2006) Data center migration  </strong></h5>
+                                <strong>Assistant to Test Manager </strong> <br>
+                                A newly created telco company is moving its data center <br>
+                                
+                                <strong>Primary Role:</strong><br> Plan, prepare and execute UAT <br>
+                                
+                                
+                                
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="panel-footer">
+                <span class="pull-left"></span>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div> 
+    
+        <div class="row">
+            <div class="col-lg-9 col-md-10 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4 text-left" >
+                                <h4><strong>2005 </strong></h4>
+                            </div>
+                            <div class="col-xs-4 text-center" >
+                                <h4><strong>Infotronic </strong></h4>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <h4> <strong>Jakarta </strong></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2005) Document Management System  </strong></h5>
+                                <strong>Support </strong> <br>
+                                Budgeting document management in Department of Defence <br>
+                                
+                                <strong>Primary Role:</strong><br> implementation support <br>
+                                
+                                
+                                
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="panel-footer">
+                <span class="pull-left"></span>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div> 
+    
+        <div class="row">
+            <div class="col-lg-9 col-md-10 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4 text-left" >
+                                <h4><strong>2003-2004 </strong></h4>
+                            </div>
+                            <div class="col-xs-4 text-center" >
+                                <h4><strong>Q2001 </strong></h4>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <h4> <strong>Jakarta </strong></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <p>
+                                
+                                <h5><strong>(2003-2004) Hospital Billing System  </strong></h5>
+                                <strong>Team Lead </strong> <br>
+                                Develop and implement a billing system in a small sized Hospital <br>
+                                
+                                <strong>Primary Role:</strong><br> Requirement elicitation, analysis, design, test etc. <br>
+                                
+                                
+                                
+                                
+                            
+                            </p>
+                        <hr />
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="panel-footer">
+                <span class="pull-left"></span>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div> 
+    
 </div>
+            </div>        
+    </div>
+
+ 
+</body>
+<!-- jQuery -->
+<script src="/public/scripts/jquery/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/public/scripts/bootstrap/js/bootstrap.min.js"></script>
+<script src="/public/scripts/sb-admin/sb-admin-2.js"></script>
+<script src="/public/scripts/metisMenu/metisMenu.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+
+<script>
+var clipboard = new Clipboard('.share-btn');
+
+    clipboard.on('success', function(e) {
+        console.log(e);
+    });
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+</script>
+
+</html>
