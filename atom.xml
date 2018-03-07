@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>HJ Agusta</title>
- <link href="/atom.xml" rel="self"/>
- <link href="/"/>
- <updated>2018-03-07T16:43:00+07:00</updated>
- <id></id>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2018-03-07T16:47:43+07:00</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name>Hendy J Agusta</name>
    <email>hendy.j.agusta@gmail.com</email>
@@ -14,21 +14,21 @@
  
  <entry>
    <title>How to add image Jekyll</title>
-   <link href="/2018/02/how-to-add-image-jekyll.html"/>
+   <link href="http://localhost:4000/2018/02/how-to-add-image-jekyll.html"/>
    <updated>2018-02-09T00:00:00+07:00</updated>
-   <id>/2018/02/how-to-add-image-jekyll</id>
+   <id>http://localhost:4000/2018/02/how-to-add-image-jekyll</id>
    <content type="html">&lt;h3 id=&quot;2018-02-09-adding-image-to-jekyll&quot;&gt;2018-02-09: adding image to Jekyll&lt;/h3&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;caption__media&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/assets/img/customer-relationship-pred-1.png&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;alt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sparse data&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;spase data&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;caption__media&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://localhost:4000/assets/img/customer-relationship-pred-1.png&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;alt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sparse data&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;spase data&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </content>
  </entry>
  
  <entry>
    <title>How to add code Jekyll</title>
-   <link href="/2018/02/how-to-add-code-jekyll.html"/>
+   <link href="http://localhost:4000/2018/02/how-to-add-code-jekyll.html"/>
    <updated>2018-02-09T00:00:00+07:00</updated>
-   <id>/2018/02/how-to-add-code-jekyll</id>
+   <id>http://localhost:4000/2018/02/how-to-add-code-jekyll</id>
    <content type="html">&lt;h3 id=&quot;2018-02-09-adding-code-to-jekyll&quot;&gt;2018-02-09: adding code to Jekyll&lt;/h3&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt; 
@@ -52,9 +52,9 @@
  
  <entry>
    <title>KDD Cup 2009 : Customer relationship prediction</title>
-   <link href="/2018/01/kdd-2009-customer-relationship-pred.html"/>
+   <link href="http://localhost:4000/2018/01/kdd-2009-customer-relationship-pred.html"/>
    <updated>2018-01-01T00:00:00+07:00</updated>
-   <id>/2018/01/kdd-2009-customer-relationship-pred</id>
+   <id>http://localhost:4000/2018/01/kdd-2009-customer-relationship-pred</id>
    <content type="html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.kdd.org/kdd-cup/view/kdd-cup-2009&quot;&gt;KDD Cup 2009&lt;/a&gt; introduction page describe the data sets as a real CRM data from a French telecommunication company Orange. The contestant is to predict customer propensity churn, appetency or up-selling.&lt;/p&gt;
@@ -67,15 +67,15 @@
 
 &lt;p&gt;The attributes/features are named as sequence ie. Var1, Var2, VarN etc. The data is wide (has many features), but sparse (a lot empty/Nan). Purple regions shows empty data or Nan, blue-ish region shows non empty.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;caption__media&quot; src=&quot;/assets/img/customer-relationship-pred-1.png&quot; alt=&quot;sparse data&quot; title=&quot;spase data&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;caption__media&quot; src=&quot;http://localhost:4000/assets/img/customer-relationship-pred-1.png&quot; alt=&quot;sparse data&quot; title=&quot;spase data&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>From Analytics to Data Scientist to AI</title>
-   <link href="/2017/11/analytics-data-scientist-ai.html"/>
+   <link href="http://localhost:4000/2017/11/analytics-data-scientist-ai.html"/>
    <updated>2017-11-29T00:00:00+07:00</updated>
-   <id>/2017/11/analytics-data-scientist-ai</id>
+   <id>http://localhost:4000/2017/11/analytics-data-scientist-ai</id>
    <content type="html">&lt;p&gt;It has been one year since I jumped on Data Science bandwagon. This article is me reflecting on what/where the journey has brought me.&lt;/p&gt;
 
 &lt;p&gt;I have worked with data for almost ten years, mostly in data management, ETL, data warehouse etc. I thought data science seems to be a natural progression of where I need to be. Instead expanding skill to be able to call my self as ‘data scientist’, I got cought up in machine learning learning part of data science. It is a rabit hole that I haven’t been able to get out off. Especially when one start to delve into ‘cutting-egde’ machine learning such as deep learning.&lt;/p&gt;
@@ -93,9 +93,9 @@
  
  <entry>
    <title>Data science/scientist what's that</title>
-   <link href="/2017/11/data-scientist.html"/>
+   <link href="http://localhost:4000/2017/11/data-scientist.html"/>
    <updated>2017-11-28T00:00:00+07:00</updated>
-   <id>/2017/11/data-scientist</id>
+   <id>http://localhost:4000/2017/11/data-scientist</id>
    <content type="html">&lt;h2 id=&quot;data-scientist-whats-that&quot;&gt;Data scientist what’s that?&lt;/h2&gt;
 
 &lt;p&gt;Data scientist work with data but unlike any other job desc that work on data he/she leverage more on data by using machine learning techniques. One can leverage on data for different things from discovering new business insight to more exciting things such what deep learning have enable company such as Google to have incredible language translator (NLP), speech recognition, picture search etc. Those things at Google are possible because the availability of lots amount of data.&lt;/p&gt;
@@ -115,9 +115,9 @@
  
  <entry>
    <title>The Loss Explosion</title>
-   <link href="/2017/11/loss-explosion.html"/>
+   <link href="http://localhost:4000/2017/11/loss-explosion.html"/>
    <updated>2017-11-15T00:00:00+07:00</updated>
-   <id>/2017/11/loss-explosion</id>
+   <id>http://localhost:4000/2017/11/loss-explosion</id>
    <content type="html">&lt;h2 id=&quot;loss-exploded-when-traning-1600-trees&quot;&gt;loss exploded when traning 1600 trees&lt;/h2&gt;
 
 &lt;h3 id=&quot;notes-nov-15&quot;&gt;Notes Nov 15&lt;/h3&gt;
@@ -133,9 +133,9 @@
  
  <entry>
    <title>NLP Sentiment (Stanford cs224d Assigment 3)</title>
-   <link href="/2017/11/stanford-224d-assigment3.html"/>
+   <link href="http://localhost:4000/2017/11/stanford-224d-assigment3.html"/>
    <updated>2017-11-01T00:00:00+07:00</updated>
-   <id>/2017/11/stanford-224d-assigment3</id>
+   <id>http://localhost:4000/2017/11/stanford-224d-assigment3</id>
    <content type="html">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 
 &lt;p&gt;Sentiment analysis is one of the subject area of NLP that benefited by the recent advancement by deep learning. Stanford cs224 Assigment 3 exposes student to Recursive Neural Network (RNN) as one of the latest deep learning model for sentiment analysis. This is author journal/notes for the assigment.&lt;/p&gt;
@@ -192,9 +192,9 @@ Deliciously(3) slow(1) .(2)
  
  <entry>
    <title>test</title>
-   <link href="/2017/10/test.html"/>
+   <link href="http://localhost:4000/2017/10/test.html"/>
    <updated>2017-10-02T00:00:00+07:00</updated>
-   <id>/2017/10/test</id>
+   <id>http://localhost:4000/2017/10/test</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;data:image/png;base64,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&quot; /&gt;&lt;/p&gt;
 
 </content>
@@ -202,9 +202,9 @@ Deliciously(3) slow(1) .(2)
  
  <entry>
    <title>Environment</title>
-   <link href="/2017/10/environment.html"/>
+   <link href="http://localhost:4000/2017/10/environment.html"/>
    <updated>2017-10-01T00:00:00+07:00</updated>
-   <id>/2017/10/environment</id>
+   <id>http://localhost:4000/2017/10/environment</id>
    <content type="html">&lt;p&gt;Python + tensorflow dev:&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;
