@@ -197,7 +197,7 @@
       <div class="container content">
         <div class="post">
   <h1 class="post-title">KDD Cup 2009 : Customer relationship prediction</h1>
-  <span class="post-date">01 Jan 2018</span>
+  <span class="post-date">01 Jan 2018  updated: 01 Mar 2018 </span>
   <h2 id="overview">Overview</h2>
 
 <p><a href="http://www.kdd.org/kdd-cup/view/kdd-cup-2009">KDD Cup 2009’s</a> introduction page describe the data sets as a real CRM data from a French telecommunication company Orange. The objective is to predict customer propensity churn, appetency or up-selling from the datasets.</p>
@@ -206,12 +206,61 @@
 
 <p>The secondary purposes of this literature is to visualize everything one migth learn from such exercises.</p>
 
-<h2 id="data-initial-observation">Data Initial Observation</h2>
+<h2 id="dataset-initial-observation">Dataset Initial Observation</h2>
 
 <p>The attributes/features are named as sequence ie. Var1, Var2, VarN etc. The data is wide (has many features), but sparse (a lot empty/Nan). Purple regions shows empty data or Nan, blue-ish region shows non empty.</p>
 
 <!--img class="caption__media" src="/assets/img/customer-relationship-pred-1.png" alt="sparse data" title="spase data" -->
 <p><img src="/assets/img/customer-relationship-pred-1.png" alt="complex sentence" /></p>
+
+<h2 id="dataset-observation-2">Dataset observation 2</h2>
+
+<p>PCA does not show any clear saperation of classes so does TSNE</p>
+
+<h3 id="pca">PCA</h3>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_sample1</span><span class="p">)</span>
+<span class="n">X_sample_pca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_sample1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_sample_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">X_sample_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">y_sample</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/img/PCA.png" alt="PCA" /></p>
+
+<h3 id="tsne">TSNE</h3>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+
+<span class="n">tsne</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c">#tsne.fit(X_sample1)
+</span>
+<span class="c">#print("fit")
+</span>
+<span class="n">X_tsne</span><span class="o">=</span><span class="n">tsne</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_sample1</span><span class="p">)</span> <span class="c">#transform(X_sample1)
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"trans"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_tsne</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">X_tsne</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">y_sample</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="/assets/img/TSNE.png" alt="TSNE" /></p>
 
 
 </div>

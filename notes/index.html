@@ -300,7 +300,40 @@ rasterio
 
     <span class="post-date">09 Feb 2018</span>
 
-    <h3 id="2018-02-09-adding-code-to-jekyll">2018-02-09: adding code to Jekyll</h3>
+    <h2 id="2018-03-07-github-page-does-not-support-jekyll-paginate">2018-03-07: Github page does not support jekyll-paginate</h2>
+
+<p>Github pages does not support jekyll-pagenate. I don’t want to revert back to pagination v1. This note shows how one can work around it. This also work for any jekyll plugin that github pages does not support.</p>
+
+<p>In the nut shell one has to create static pages in their work area (generate _site) and push it to Github as master</p>
+
+<ol>
+  <li>got to your work directory and delete _site
+    <blockquote>
+      <p>rm -rf _site</p>
+    </blockquote>
+  </li>
+  <li>clone you master to _site
+    <blockquote>
+      <p>git clone https://github.com/${username}/${username}.github.io.git –branch master _site</p>
+    </blockquote>
+  </li>
+  <li>build jekyll statis pages
+    <blockquote>
+      <p>jekyll build</p>
+    </blockquote>
+  </li>
+  <li>go to _site
+    <blockquote>
+      <p>cd _site
+touch .nojekyll
+git add -A
+git commit -m “add some comment”
+git push origin master</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="2018-02-09-adding-code-to-jekyll">2018-02-09: adding code to Jekyll</h3>
 
 <figure class="highlight"><pre><code class="language-js" data-lang="js"> 
 <span class="p">{</span><span class="o">%</span> <span class="nx">highlight</span> <span class="nx">js</span> <span class="o">%</span><span class="p">}</span> 
@@ -322,6 +355,7 @@ rasterio
 <h3 id="2018-02-09-adding-image-to-jekyll">2018-02-09: adding image to Jekyll</h3>
 
 <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">img</span> <span class="kd">class</span><span class="o">=</span><span class="s2">"caption__media"</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"/assets/img/customer-relationship-pred-1.png"</span> <span class="nx">alt</span><span class="o">=</span><span class="s2">"sparse data"</span> <span class="nx">title</span><span class="o">=</span><span class="s2">"spase data"</span><span class="o">&gt;</span></code></pre></figure>
+
 
   </div>
 
@@ -368,7 +402,7 @@ rasterio
       </a>
     </h1>
 
-    <span class="post-date">01 Oct 2017</span>
+    <span class="post-date">01 Oct 2017-Updated:28 Nov 2017</span>
 
     my notebook environment setup
   </div>
@@ -382,7 +416,7 @@ rasterio
       </a>
     </h1>
 
-    <span class="post-date">09 Feb 2018</span>
+    <span class="post-date">09 Feb 2018-Updated:28 Nov 2017</span>
 
     Notes on how to add code to Jekyll
   </div>
@@ -396,7 +430,7 @@ rasterio
       </a>
     </h1>
 
-    <span class="post-date">15 Nov 2017</span>
+    <span class="post-date">15 Nov 2017-Updated:28 Nov 2017</span>
 
     A common problem during deep network training is diminished or exploded loss. During cs224d assigment 3 training I encoutered exploding loss problem. I employ few tricks that I found in the web to counter this problem: weight initialization, Layer normalization and optimization. I am not sure which trick is more important. More research is needed
   </div>
