@@ -33,8 +33,8 @@
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
     
   <!-- other junk -->
-  <link rel="canonical" href="/2018/01/kdd-2009-customer-relationship-pred.html">
-  <meta name="description" content="Exploritory exercise to predict customer propensity from KDD Cup 2009 dataset">
+  <link rel="canonical" href="http://localhost:4000/2018/01/kdd-2009-customer-relationship-pred.html">
+  <meta name="description" content="Exploratory exercise to predict customer propensity from KDD Cup 2009 dataset">
     
   
 
@@ -61,7 +61,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home</a>
+    <a class="sidebar-nav-item" href="http://localhost:4000/">Home</a>
 
     
     
@@ -197,25 +197,262 @@
       <div class="container content">
         <div class="post">
   <h1 class="post-title">KDD Cup 2009 : Customer relationship prediction</h1>
-  <span class="post-date">01 Jan 2018  updated: 01 Mar 2018 </span>
+  <span class="post-date">01 Jan 2018  updated: 20 Mar 2018 </span>
   <h2 id="overview">Overview</h2>
 
 <p><a href="http://www.kdd.org/kdd-cup/view/kdd-cup-2009">KDD Cup 2009’s</a> introduction page describe the data sets as a real CRM data from a French telecommunication company Orange. The objective is to predict customer propensity churn, appetency or up-selling from the datasets.</p>
 
-<p>The puropose of this literature is to journal a machine learning exploritory exercise based on the data mentioned. First a baseline predictions is establish by excesicing common machine learning algorithm (such as logistic regression, random forest etc). Later we explore other tricks/method such as features engineering, or even explore other machine learing algorithm.</p>
+<p>The purpose of this literature is to journal a machine learning exploratory exercise based on the data mentioned. First a baseline predictions is establish by accessing common machine learning algorithm (such as logistic regression, random forest etc). Later we explore other tricks/method such as features engineering, or even explore other machine learing algorithm.</p>
 
-<p>The secondary purposes of this literature is to visualize everything one migth learn from such exercises.</p>
+<p>The secondary purposes of this literature is to visualize everything one might learn from such exercises.</p>
+
+<h2 id="to-tryideas">To try/ideas:</h2>
+
+<p>1&gt; Find way to reduce features
+2&gt; One and all training
+3&gt;</p>
+
+<h2 id="update-2018-03-20-prediction-with-numerical-and-one-hot-categorical-features">Update 2018-03-20: Prediction with numerical and one-hot categorical features</h2>
+
+<p>Run into memory error yet again while running GBD with full expanded feature. I may have to reduce the feature</p>
+
+<h3 id="update-note-one-hot-catagorical-features">Update Note: One hot Catagorical features</h3>
+
+<p>Scikit-learn (particulary linear and GDB models) could not process categorical features without pre-process it into numerical representation. The easiest pre-processing categorical features is to encode the category into numbers. For example for color encode to red as 0, blue as 1, yellow as 2 etc. But this would encoded cardinality to the feature which may not be desired for obvious reason that red (0) cannot be lesser than blue (1). More common method is to encode them into one-hot features. To one-hot encode, in the color example, is to expand color feature saperate into color_red, color_blue, color_yellow features each contain zero or one value. Other method I have seen people is embedding. For this exercise I used one-hot encoding. I migth also try embedding in the future.</p>
+
+<p>I need a function that turn categorical features into binary/one-hot encoder that during training one-hot all the categorical features and assign new-found feature to <unk> feature during test. The ability to take-in new data category is important for production system which this exercise will never going to be. I have no particular target for this exploration so why not go to the rabbit hole.</unk></p>
+
+<p>After searching the internet for sometime, I cannot not find scikit-learn/other module/function that would satisfy the ohe-hot encoder expressed above. The closest thing is Pandas get_dummy function but it would not handle new data during test.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">coo_matrix</span>
+
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">():</span>
+    <span class="c">#### load data file
+</span>
+    <span class="n">dt</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'orange_small_test.data'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span>
+    <span class="c">#### Load label files
+</span>
+    <span class="n">appetency_lbl</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'orange_small_train_appetency.labels'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">churn_lbl</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'orange_small_train_churn.labels'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">upsell_lbl</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'orange_small_train_upselling.labels'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">appetency_lbl</span><span class="p">[</span><span class="mi">0</span><span class="p">]],[</span><span class="n">churn_lbl</span><span class="p">[</span><span class="mi">0</span><span class="p">]],[</span><span class="n">upsell_lbl</span><span class="p">[</span><span class="mi">0</span><span class="p">]]])</span>
+    <span class="n">lables</span><span class="o">=</span><span class="n">labels</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+    
+    <span class="c">#### concate labels from each lebels file and add to dataframe
+</span>
+    <span class="n">z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="n">lables</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">z</span><span class="p">,</span><span class="n">lables</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">lbl</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c"># 0 = not classified, 1 = appetency, 2 = churn, 3 = up-sell
+</span>
+    <span class="n">dt</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">=</span><span class="n">lbl</span>
+    
+    <span class="c"># change all object to category
+</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">dt</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dt</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="nb">object</span><span class="p">:</span>
+            <span class="n">dt</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">=</span><span class="n">dt</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'category'</span><span class="p">)</span>
+    
+    <span class="n">des</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s">'all'</span><span class="p">)</span>   
+    <span class="n">desT</span><span class="o">=</span><span class="n">des</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    <span class="n">desT</span><span class="p">[</span><span class="s">'dtype'</span><span class="p">]</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">dtypes</span>
+    
+    <span class="c"># drop all null column
+</span>
+    <span class="n">drop_columns</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">_</span><span class="o">=</span><span class="p">[</span><span class="n">drop_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">desT</span><span class="p">[</span><span class="n">desT</span><span class="p">[</span><span class="s">'count'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+    <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dt</span>
+
+<span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">split</span><span class="o">=</span><span class="p">[</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">split</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"must incl 2(train,validation) spilts test split will be counted as the remain"</span><span class="p">)</span>
+        <span class="k">return</span> 
+    <span class="n">train_data</span><span class="o">=</span><span class="bp">None</span>
+    <span class="n">val_data</span><span class="o">=</span><span class="bp">None</span>
+    <span class="n">test_data</span><span class="o">=</span><span class="bp">None</span>
+    <span class="n">col_names</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">class_0</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">class_1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">class_2</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">class_3</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">]</span>
+    
+    <span class="n">data_count</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">c0_count</span><span class="o">=</span><span class="n">class_0</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">c1_count</span><span class="o">=</span><span class="n">class_1</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">c2_count</span><span class="o">=</span><span class="n">class_2</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">c3_count</span><span class="o">=</span><span class="n">class_3</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="s">'data:'</span><span class="p">,</span><span class="n">data_count</span><span class="p">,</span><span class="s">'label 0:'</span><span class="p">,</span><span class="n">c0_count</span><span class="p">,</span><span class="s">'label 1:'</span><span class="p">,</span><span class="n">c1_count</span><span class="p">,</span>\
+          <span class="s">'label 2:'</span><span class="p">,</span><span class="n">c2_count</span><span class="p">,</span> <span class="s">'label 3:'</span><span class="p">,</span><span class="n">c3_count</span><span class="p">)</span>
+    
+    <span class="n">train_data</span><span class="o">=</span><span class="p">(((</span><span class="n">class_0</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">c0_count</span><span class="o">*</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">class_1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">c1_count</span><span class="o">*</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span><span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> \
+            <span class="n">class_2</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">c2_count</span><span class="o">*</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span><span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">class_3</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">c3_count</span><span class="o">*</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span> \
+                                                                           <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="n">val_data</span><span class="o">=</span><span class="p">(((</span><span class="n">class_0</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c0_count</span><span class="o">*</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span><span class="nb">int</span><span class="p">(</span><span class="n">c0_count</span><span class="o">*</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">]))])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>  \
+            <span class="n">class_1</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c1_count</span><span class="o">*</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span><span class="nb">int</span><span class="p">(</span><span class="n">c1_count</span><span class="o">*</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">]))],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> \
+            <span class="n">class_2</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c2_count</span><span class="o">*</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span><span class="nb">int</span><span class="p">(</span><span class="n">c2_count</span><span class="o">*</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">]))],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> \
+            <span class="n">class_3</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c3_count</span><span class="o">*</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span><span class="nb">int</span><span class="p">(</span><span class="n">c3_count</span><span class="o">*</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">]))],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="n">test_data</span><span class="o">=</span><span class="p">(((</span><span class="n">class_0</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c0_count</span><span class="o">*</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">])):])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>  \
+            <span class="n">class_1</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c1_count</span><span class="o">*</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">])):],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> \
+            <span class="n">class_2</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c2_count</span><span class="o">*</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">])):],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> \
+                <span class="n">class_3</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c3_count</span><span class="o">*</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">])):],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        
+    <span class="k">print</span><span class="p">(</span><span class="s">'train_data:'</span><span class="p">,</span><span class="n">train_data</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span><span class="s">'val_data:'</span><span class="p">,</span><span class="n">val_data</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>\
+          <span class="s">'test_data:'</span><span class="p">,</span><span class="n">test_data</span><span class="p">[</span><span class="s">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+    <span class="n">train_data</span><span class="o">=</span><span class="n">train_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">val_data</span><span class="o">=</span><span class="n">val_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">train_data</span><span class="p">,</span><span class="n">val_data</span><span class="p">,</span><span class="n">test_data</span>
+
+<span class="k">def</span> <span class="nf">tokenize_column</span><span class="p">(</span><span class="n">col</span><span class="p">,</span><span class="n">col_name</span><span class="p">,</span><span class="n">isTrain</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="n">new_col_name</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">_row_pos</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">_col_pos</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">_val</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">irow</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">if</span> <span class="n">isTrain</span><span class="p">:</span>
+        <span class="n">_one_hot_col_names</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">col</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_one_hot_col_names</span><span class="p">:</span>
+                <span class="c">#print(col_name,d)
+</span>
+                <span class="n">new_col_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col_name</span><span class="o">+</span><span class="s">'_'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+                <span class="n">_one_hot_col_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+            <span class="n">_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">_row_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">irow</span><span class="p">)</span>
+            <span class="n">_col_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_one_hot_col_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+            <span class="n">irow</span><span class="o">=</span><span class="n">irow</span><span class="o">+</span><span class="mi">1</span>
+        
+        <span class="n">new_data</span><span class="o">=</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">_val</span><span class="p">,</span> <span class="p">(</span><span class="n">_row_pos</span><span class="p">,</span> <span class="p">[</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_col_pos</span><span class="p">])),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_row_pos</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">_one_hot_col_names</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span> 
+        <span class="n">col</span><span class="o">=</span><span class="n">_one_hot_col_names</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_one_hot_col_names</span><span class="o">=</span><span class="n">col_name</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">col</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_one_hot_col_names</span><span class="p">:</span>
+                <span class="n">_col_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">col_idx</span><span class="o">=</span><span class="n">_one_hot_col_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                <span class="n">_col_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col_idx</span><span class="p">)</span>
+            <span class="n">_row_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">irow</span><span class="p">)</span>
+            <span class="n">_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">irow</span><span class="o">=</span><span class="n">irow</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">new_data</span><span class="o">=</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">_val</span><span class="p">,</span> <span class="p">(</span><span class="n">_row_pos</span><span class="p">,</span> <span class="n">_col_pos</span><span class="p">)),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_row_pos</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">_one_hot_col_names</span><span class="p">)))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+        <span class="n">new_col_name</span><span class="o">=</span><span class="bp">None</span>
+        <span class="n">col</span><span class="o">=</span><span class="bp">None</span>
+    <span class="k">return</span> <span class="n">new_data</span><span class="p">,</span> <span class="n">new_col_name</span><span class="p">,</span> <span class="n">col</span>
+
+<span class="k">class</span> <span class="nc">OneHotEncoder</span><span class="p">:</span>
+    
+    <span class="n">cols</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">new_cols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">new_cols_flat</span><span class="o">=</span><span class="bp">None</span>
+    <span class="n">new_data_added</span><span class="o">=</span><span class="bp">None</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">new_features</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">data_old</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">iat</span> <span class="o">=</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="o">=</span><span class="n">cols</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"init"</span><span class="p">)</span>
+        
+    <span class="c">#def _train(self, data, isTrain=True):
+</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">!=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"exit data type must be: "</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
+        
+        <span class="n">cols</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
+        <span class="n">new_col_name</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="n">new_col_name_flat</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">new_features</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+            <span class="n">_new_dat</span><span class="p">,</span><span class="n">_new_col_name</span><span class="p">,</span><span class="n">_new_features</span><span class="o">=</span><span class="n">tokenize_column</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">],</span><span class="n">col</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">col</span><span class="p">,</span><span class="n">_new_dat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">new_dat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_new_dat</span><span class="p">)</span>
+                <span class="n">i</span><span class="o">=</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_dat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">new_dat</span><span class="p">,</span><span class="n">_new_dat</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">new_col_name</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s">'unk'</span><span class="p">]</span><span class="o">+</span><span class="n">_new_features</span>
+            <span class="n">new_col_name_flat</span><span class="o">=</span><span class="n">new_col_name_flat</span><span class="o">+</span><span class="p">[</span><span class="n">col</span> <span class="o">+</span> <span class="s">'_unk'</span><span class="p">]</span><span class="o">+</span><span class="n">_new_col_name</span>
+            <span class="n">new_features</span> <span class="o">=</span> <span class="n">new_features</span> <span class="o">+</span> <span class="n">_new_features</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'new columns len'</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">new_col_name_flat</span><span class="p">),</span><span class="s">'new data shape:'</span><span class="p">,</span><span class="n">new_dat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_old</span><span class="o">=</span><span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_col</span><span class="o">=</span><span class="n">new_col_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_cols_flat</span><span class="o">=</span><span class="n">new_col_name_flat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_feature</span><span class="o">=</span><span class="n">new_features</span>
+        <span class="n">new_data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_dat</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">new_col_name_flat</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_data_added</span><span class="o">=</span><span class="n">new_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iat</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">iat</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+        <span class="c">#print(data.iat,self.iat)
+</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">iat</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">iat</span><span class="p">:</span>
+            <span class="n">new_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">new_data_added</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cols</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
+            <span class="n">_new_binarized_features</span><span class="o">=</span><span class="bp">None</span>
+            <span class="n">icol</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+                <span class="c">#print(self.new_col[col])
+</span>
+                <span class="n">_new_data</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">tokenize_column</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">new_col</span><span class="p">[</span><span class="n">col</span><span class="p">],</span><span class="n">isTrain</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="c">#print(_new_data)
+</span>
+                <span class="k">if</span> <span class="n">icol</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">new_data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_new_data</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+                    <span class="n">icol</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">new_data</span><span class="p">,</span><span class="n">_new_data</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c">#print(new_data)
+</span>
+            <span class="n">new_data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_data</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">new_cols_flat</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_data</span></code></pre></figure>
+
+<h2 id="update-2018-03-01-numerical-data-only-prediction">Update 2018-03-01: Numerical data only Prediction</h2>
+
+<h3 id="prediction">Prediction</h3>
+
+<p>The model predicts 0.834866053579 accuracy. But further investigation reveal that the model only predict 0 (normal) during test time. This is consistence with previous hypothesis that the data skewed to normal that it is hard for the model to learn especially logistic regression.</p>
+
+<h3 id="update-notes-numerical-pre-processingnormalization-and-missing-values">Update notes: Numerical pre-processing(Normalization and missing values)</h3>
+
+<p>I used normalization to help the training. I haven’t been able to verify (from experience or my own test) whether normalization help training. But as mention in many cases (one of Andrew Ng vidoes on machine learning in particular) normalization supposed to help.</p>
+
+<p>I used scikit-learn’s Imputer function to replace numerical missing values with median and Normalizer to normalize data. I don’t see the advatages of using each available imputer strategy (median, mean and most-frequent), but may be I will become clearer later on.</p>
 
 <h2 id="dataset-initial-observation">Dataset Initial Observation</h2>
 
 <p>The attributes/features are named as sequence ie. Var1, Var2, VarN etc. The data is wide (has many features), but sparse (a lot empty/Nan). Purple regions shows empty data or Nan, blue-ish region shows non empty.</p>
 
-<!--img class="caption__media" src="/assets/img/customer-relationship-pred-1.png" alt="sparse data" title="spase data" -->
-<p><img src="/assets/img/customer-relationship-pred-1.png" alt="complex sentence" /></p>
+<!--img class="caption__media" src="http://localhost:4000/assets/img/customer-relationship-pred-1.png" alt="sparse data" title="spase data" -->
+<p><img src="http://localhost:4000/assets/img/customer-relationship-pred-1.png" alt="complex sentence" /></p>
 
 <h2 id="dataset-observation-2">Dataset observation 2</h2>
 
-<p>PCA does not show any clear saperation of classes so does TSNE</p>
+<p>PCA does not show any clear separation of classes so does TSNE</p>
 
 <h3 id="pca">PCA</h3>
 
@@ -232,7 +469,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_sample_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">X_sample_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">y_sample</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="/assets/img/PCA.png" alt="PCA" /></p>
+<p><img src="http://localhost:4000/assets/img/PCA.png" alt="PCA" /></p>
 
 <h3 id="tsne">TSNE</h3>
 
@@ -260,7 +497,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_tsne</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">X_tsne</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">y_sample</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><img src="/assets/img/TSNE.png" alt="TSNE" /></p>
+<p><img src="http://localhost:4000/assets/img/TSNE.png" alt="TSNE" /></p>
 
 
 </div>
