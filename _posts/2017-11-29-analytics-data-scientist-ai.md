@@ -3,6 +3,7 @@ layout: post
 title: From Analytics to Data Scientist to AI
 description: End of year reflection
 categories: blog, ML
+updated: 2017-11-29
 ---
 
 It has been one year since I jumped on Data Science bandwagon. This article is me reflecting on what/where the journey has brought me.  

@@ -3,6 +3,7 @@ title: Data science/scientist what's that
 layout: post
 description: A Look to Data Science
 categories: blog, data science
+updated: 2017-11-28
 ---
 
 ## Data scientist what's that?

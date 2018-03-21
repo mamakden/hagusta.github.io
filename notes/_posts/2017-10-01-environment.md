@@ -3,6 +3,7 @@ layout: post
 title: Environment  
 description: my notebook environment setup
 categories: notes, etc
+updated: 2017-11-28
 ---
 
 Python + tensorflow dev:
