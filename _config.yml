@@ -10,6 +10,7 @@ description:         'HJ Agusta technical notes, blog and journals'
 #url:                 http://lanyon.getpoole.com
 #baseurl:             '/blog'
 baseurl:             ''
+markdown:   redcarpet
 
 github_page:         https://github.com/hagusta
 
